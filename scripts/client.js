@@ -13,7 +13,7 @@ class Employee{
 
 //setup employee array
 const employees = [];
-
+let costs = 0;
 function readyNow( ){
     $( '#submitEmployeeBtn' ).on( 'click', newEmployee );
 }
@@ -35,4 +35,14 @@ function newEmployee( ){
     $('#employeeIdIn').val('');
     $('#employeeTitleIn').val('');
     $('#employeeSalaryIn').val('');
+    //calculate new costs
+    calcCosts( );
 }// end newEmployee function
+
+//calculate monthly costs of employees
+function calcCosts( ){
+    costs = 0;
+    for( let person of employees ){
+        costs += parseInt( person.salary );
+    }
+}
