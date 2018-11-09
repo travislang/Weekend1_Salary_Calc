@@ -16,7 +16,18 @@ const employees = [];
 let costs = 0;
 function readyNow( ){
     $( '#submitEmployeeBtn' ).on( 'click', newEmployee );
+    $( '#employeeInfo' ).on( 'click', $( '.deleteEmployee' ), deleteEmployeeInfo );
 }
+
+function deleteEmployeeInfo( ){
+    console.log( ' in delete function')
+    console.log( $(this))
+    for( let person of employees ){
+        if( person.id === $( this ).attr( 'id' ) ){
+            console.log( 'worked')
+        }// check if delete employee matches in array
+    }// end for loop
+}// end deleteEmployeeInfo function
 
 //create new employee from input fields
 function newEmployee( ){
@@ -68,12 +79,16 @@ function displayInfo( ){
     tableBody.empty( );
     // append employees to DOM
     for( let person of employees ){
-        tableBody.append(`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.id}</td><td>${person.title}</td><td>${person.salary}</td></tr>` )
-
+        tableBody.append(`<tr id="${person.id}"><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.id}</td><td>${person.title}</td><td>${person.salary}</td><td><button id="${person.id}" class="deleteEmployee">Delete</button></td></tr>` );
+        // add delete button to every employee
+        // $( '#employeeRow' ).append( `<button id="${person.firstName}" class="deleteEmployee">Delete</button>` );
     }
     //push total costs to display on DOM
     let displayCosts = $('#employeeCosts');
     // clear DOM first
     displayCosts.empty( );
     displayCosts.append( `Total Monthly: $${costs.toFixed( 2 ) }` );
+    if( costs > 20000 ){
+        displayCosts.addClass( 'costsOver' )
+    }
 }// end displayInfo function
