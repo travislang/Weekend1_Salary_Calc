@@ -14,19 +14,24 @@ class Employee{
 //setup employee array
 const employees = [];
 let costs = 0;
+
 function readyNow( ){
     $( '#submitEmployeeBtn' ).on( 'click', newEmployee );
-    $( '#employeeInfo' ).on( 'click', $( '.deleteEmployee' ), deleteEmployeeInfo );
+    $( '#employeeInfo' ).on( 'click', '.deleteEmployee', deleteEmployeeInfo );
 }
 
+// delete employee from array
 function deleteEmployeeInfo( ){
     console.log( ' in delete function')
-    console.log( $(this))
     for( let person of employees ){
         if( person.id === $( this ).attr( 'id' ) ){
-            console.log( 'worked')
+            employees.splice( employees.indexOf( person ), 1 );
         }// check if delete employee matches in array
     }// end for loop
+    // recalculate costs
+    calcCosts( );
+    //update DOM after deletion
+    displayInfo();
 }// end deleteEmployeeInfo function
 
 //create new employee from input fields
@@ -56,13 +61,12 @@ function newEmployee( ){
         $('#employeeTitleIn').val('');
         $('#employeeSalaryIn').val('');
         //calculate new costs
-        calcCosts();
+        calcCosts( );
         //update and display new info
-        displayInfo();
+        displayInfo( );
     }// if all forms are correct
 }// end newEmployee function
     
-
 //calculate monthly costs of employees
 function calcCosts( ){
     costs = 0;
@@ -79,9 +83,9 @@ function displayInfo( ){
     tableBody.empty( );
     // append employees to DOM
     for( let person of employees ){
-        tableBody.append(`<tr id="${person.id}"><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.id}</td><td>${person.title}</td><td>${person.salary}</td><td><button id="${person.id}" class="deleteEmployee">Delete</button></td></tr>` );
+        tableBody.append(`<tr class="employeeRow"><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.id}</td><td>${person.title}</td><td>${person.salary}</td></tr>` );
         // add delete button to every employee
-        // $( '#employeeRow' ).append( `<button id="${person.firstName}" class="deleteEmployee">Delete</button>` );
+        $( '.employeeRow' ).last( ).append( `<button id="${person.id}" class="deleteEmployee">Delete</button>` );
     }
     //push total costs to display on DOM
     let displayCosts = $('#employeeCosts');
@@ -89,6 +93,9 @@ function displayInfo( ){
     displayCosts.empty( );
     displayCosts.append( `Total Monthly: $${costs.toFixed( 2 ) }` );
     if( costs > 20000 ){
-        displayCosts.addClass( 'costsOver' )
+        displayCosts.addClass( 'costsOver' );
+    }
+    else{
+        displayCosts.removeClass( 'costsOver' );
     }
 }// end displayInfo function
