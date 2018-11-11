@@ -85,7 +85,7 @@ function displayInfo( ){
     for( let person of employees ){
         tableBody.append(`<tr class="employeeRow"><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.id}</td><td>${person.title}</td><td>${person.salary}</td></tr>` );
         // add delete button to every employee
-        $( '.employeeRow' ).last( ).append( `<button id="${person.id}" class="deleteEmployee">Delete</button>` );
+        $('.employeeRow').last().append(`<button id="${person.id}" class="deleteEmployee btn btn-danger">Delete</button>` );
     }
     //push total costs to display on DOM
     let displayCosts = $('#employeeCosts');

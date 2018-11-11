@@ -11,19 +11,19 @@
     <title>Salary Calculator</title>
 </head>
 <body>
-    <h1 class="titlePage jumbotron">Salary Calculator</h1>
-    <div>
+    <h1 class="text-white-50 bg-dark titlePage jumbotron">Salary Calculator</h1>
+    <div class="employeeInputs">
         <h3>Add Employee</h3>
         <input id="employeeFirstIn" type="text" placeholder="First Name">
         <input id="employeeLastIn" type="text" placeholder="Last Name">
         <input id="employeeIdIn" type="number" placeholder="ID">
         <input id="employeeTitleIn" type="text" placeholder="Title">
         <input id="employeeSalaryIn" type="number" placeholder="Annual Salary">
-        <button id="submitEmployeeBtn">Submit</button>
+        <button class="btn btn-secondary" id="submitEmployeeBtn">Submit</button>
     </div>
     <div>
         <h3>Employees</h3>
-        <table class="table table-striped" id="employeeTable">
+        <table class="table table-striped table-bordered" id="employeeTable">
             <thead>
                 <tr>
                     <th>First Name</th>
@@ -37,8 +37,8 @@
             </tbody>
         </table>
     </div>
-    <div>
-        <h3 id="employeeCosts">Total Monthly: $100,000.00</h3>
+    <div class="costsContainer">
+        <h3 id="employeeCosts">Total Monthly: $0.00</h3>
     </div>
 </body>
 </html>
