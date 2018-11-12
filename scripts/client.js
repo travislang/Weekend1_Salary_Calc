@@ -22,12 +22,20 @@ function readyNow( ){
 
 // delete employee from array
 function deleteEmployeeInfo( ){
-    console.log( ' in delete function')
-    for( let person of employees ){
-        if( person.id === $( this ).attr( 'id' ) ){
-            employees.splice( employees.indexOf( person ), 1 );
-        }// check if delete employee matches in array
+    console.log( ' in delete function');
+    
+    for ( let person of employees ){
+        if( parseInt( person.id ) === $( this ).data( 'id' ) ){
+            employees.splice(employees.indexOf(person), 1);
+      }// check if delete employee matches in array
     }// end for loop
+
+    // this works as well.  Which way is better attr or data...data is private I think
+    // for( let person of employees ){
+    //     if( person.id === $( this ).attr( 'data-id' ) ){
+    //         employees.splice( employees.indexOf( person ), 1 );
+    //     }// check if delete employee matches in array
+    // }// end for loop
     // recalculate costs
     calcCosts( );
     //update DOM after deletion
@@ -85,7 +93,7 @@ function displayInfo( ){
     for( let person of employees ){
         tableBody.append(`<tr class="employeeRow"><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.id}</td><td>${person.title}</td><td>${person.salary}</td></tr>` );
         // add delete button to every employee
-        $('.employeeRow').last().append(`<button id="${person.id}" class="deleteEmployee btn btn-danger">Delete</button>` );
+        $('.employeeRow').last().append(`<button data-id="${person.id}" class="deleteEmployee btn btn-danger">Delete</button>` );
     }
     //push total costs to display on DOM
     let displayCosts = $('#employeeCosts');
